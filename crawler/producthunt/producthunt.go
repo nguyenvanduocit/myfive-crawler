@@ -5,6 +5,7 @@ import (
 "time"
 	"net/http"
 	"encoding/json"
+	"fmt"
 )
 
 type Data struct {
@@ -13,6 +14,7 @@ type Data struct {
 
 type Product struct {
 	Name string `json:"name"`
+	Tagline string `json:"tagline"`
 	URL string `json:"url"`
 }
 
@@ -52,8 +54,8 @@ func (crawler *ProductHuntCrawler)Parse()(*gofeed.Feed, error){
 	posts := respData.Posts[:10]
 	for _, post := range posts{
 		item:= &gofeed.Item{}
-		item.Title = post.Name
-		item.Link = post.URL
+		item.Title = fmt.Sprintf("%s: %s", post.Name, post.Tagline)
+		item.Link = fmt.Sprintf("https://www.producthunt.com%s",post.URL)
 		now := time.Now()
 		item.PublishedParsed = &now
 		crawler.Feed.Items = append(crawler.Feed.Items, item)
