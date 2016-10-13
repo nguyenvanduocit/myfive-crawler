@@ -1,11 +1,10 @@
 package CrawlerInterface
 
 import (
-	"github.com/nguyenvanduocit/myfive-crawler/model/rss"
-	"github.com/nguyenvanduocit/myfive-crawler/model/site"
+	"github.com/mmcdole/gofeed"
 )
 
 type Crawler interface {
-	GetTopFive()([]*RssModel.Item, error)
-	GetSiteInfo()(*SiteModel.Site, error)
+	Parse()(*gofeed.Feed, error)
+	GetIdentifyURL()(string)
 }
