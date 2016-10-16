@@ -4,6 +4,7 @@ import (
 	"github.com/mmcdole/gofeed"
 	"github.com/PuerkitoBio/goquery"
 	"time"
+	"strings"
 )
 
 type MediumCrawler struct {
