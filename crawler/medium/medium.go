@@ -4,7 +4,6 @@ import (
 	"github.com/mmcdole/gofeed"
 	"github.com/PuerkitoBio/goquery"
 	"time"
-	"strings"
 )
 
 type MediumCrawler struct {
@@ -34,14 +33,12 @@ func (crawler *MediumCrawler)Parse()(*gofeed.Feed, error){
 	crawler.Feed.Title = doc.Find("title").Text()
 	doc.Find(".js-homeStream .streamItem").Each(func(i int, s *goquery.Selection) {
 		title := s.Find(".graf--title")
-		if(len(title) > 0){
-			item:= &gofeed.Item{}
-			item.Title = title.Text()
-			item.Link,_ = s.Find(".postArticle-content a").Attr("href")
-			now := time.Now()
-			item.PublishedParsed = &now
-			crawler.Feed.Items = append(crawler.Feed.Items, item)
-		}
+		item:= &gofeed.Item{}
+		item.Title = title.Text()
+		item.Link,_ = s.Find(".postArticle-content a").Attr("href")
+		now := time.Now()
+		item.PublishedParsed = &now
+		crawler.Feed.Items = append(crawler.Feed.Items, item)
 	})
 	return crawler.Feed, nil
 
