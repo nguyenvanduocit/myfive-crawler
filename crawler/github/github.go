@@ -23,24 +23,23 @@ func (crawler *GithubCrawler)GetIdentifyURL()(string){
 }
 
 func (crawler *GithubCrawler)Parse()(*gofeed.Feed, error){
-	if(crawler.Feed != nil){
+	if(crawler.Feed == nil){
 		return crawler.Feed, nil
 	}
+
 	doc, err := goquery.NewDocument(crawler.Url)
 	if err != nil {
 		return nil, err
 	}
-	feed := gofeed.Feed{}
-	feed.Title = doc.Find("title").Text()
+	crawler.Feed.Title = doc.Find("title").Text()
 	doc.Find(".explore-content .repo-list .repo-list-item").Each(func(i int, s *goquery.Selection) {
 		item:= &gofeed.Item{}
 		item.Title, _ = s.Find(".repo-list-name a").Attr("href")
 		item.Link = "https://github.com" + item.Title
 		now := time.Now()
 		item.PublishedParsed = &now
-		feed.Items = append(feed.Items, item)
+		crawler.Feed.Items = append(crawler.Feed.Items, item)
 	})
-	crawler.Feed = &feed
 	return crawler.Feed, nil
 
 }

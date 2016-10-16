@@ -8,6 +8,8 @@ import (
 	"fmt"
 )
 
+
+// JSON Struct for data recived from product hunt API
 type Data struct {
 	Posts []*Product `json:"posts"`
 }
