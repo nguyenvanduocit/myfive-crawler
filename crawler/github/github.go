@@ -33,6 +33,7 @@ func (crawler *GithubCrawler)Parse()(*gofeed.Feed, error){
 	}
 	crawler.Feed = &gofeed.Feed{
 		Title: doc.Find("title").Text(),
+		Items:[]*gofeed.Item{},
 	}
 	doc.Find(".explore-content .repo-list .repo-list-item").Each(func(i int, s *goquery.Selection) {
 		item:= &gofeed.Item{}
