@@ -5,9 +5,7 @@ import (
 )
 
 func TestGithubCrawler_Parse(t *testing.T) {
-	crawler := GithubCrawler{
-		Url:"https://github.com/trending",
-	}
+	crawler := NewCrawler("https://github.com/trending")
 	feed,err := crawler.Parse()
 	if err != nil {
 		t.Error(err)
