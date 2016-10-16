@@ -1,10 +1,9 @@
-package Github
+package github
 
 import (
 	"github.com/mmcdole/gofeed"
 	"github.com/PuerkitoBio/goquery"
 	"time"
-	"fmt"
 )
 
 type GithubCrawler struct {
@@ -24,7 +23,7 @@ func (crawler *GithubCrawler)GetIdentifyURL()(string){
 }
 
 func (crawler *GithubCrawler)Parse()(*gofeed.Feed, error){
-	if(crawler.Feed == nil){
+	if(crawler.Feed != nil){
 		return crawler.Feed, nil
 	}
 
@@ -37,7 +36,6 @@ func (crawler *GithubCrawler)Parse()(*gofeed.Feed, error){
 		Items:[]*gofeed.Item{},
 	}
 	doc.Find(".explore-content .repo-list .repo-list-item").Each(func(i int, s *goquery.Selection) {
-		fmt.Println("Done")
 		item:= &gofeed.Item{}
 		item.Title, _ = s.Find(".repo-list-name a").Attr("href")
 		item.Link = "https://github.com" + item.Title

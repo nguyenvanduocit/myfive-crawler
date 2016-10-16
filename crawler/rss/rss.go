@@ -1,4 +1,4 @@
-package RssCrawler
+package rss
 
 import (
 	"github.com/mmcdole/gofeed"

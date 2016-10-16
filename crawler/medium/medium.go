@@ -1,4 +1,4 @@
-package Medium
+package medium
 
 import (
 	"github.com/mmcdole/gofeed"

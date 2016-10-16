@@ -1,4 +1,4 @@
-package Producthunt
+package producthunt
 
 import (
 "github.com/mmcdole/gofeed"
