@@ -4,6 +4,7 @@ import (
 	"github.com/mmcdole/gofeed"
 	"github.com/PuerkitoBio/goquery"
 	"time"
+	"fmt"
 )
 
 type GithubCrawler struct {
@@ -43,6 +44,7 @@ func (crawler *GithubCrawler)Parse()(*gofeed.Feed, error){
 		item.PublishedParsed = &now
 		crawler.Feed.Items = append(crawler.Feed.Items, item)
 	})
+	fmt.Println(len(crawler.Feed.Items))
 	return crawler.Feed, nil
 
 }
