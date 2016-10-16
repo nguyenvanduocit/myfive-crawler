@@ -30,7 +30,9 @@ func (crawler *MediumCrawler)Parse()(*gofeed.Feed, error){
 	if err != nil {
 		return nil, err
 	}
-	crawler.Feed.Title = doc.Find("title").Text()
+	crawler.Feed = &gofeed.Feed{
+		Title: doc.Find("title").Text(),
+	}
 	doc.Find(".js-homeStream .streamItem").Each(func(i int, s *goquery.Selection) {
 		title := s.Find(".graf--title")
 		item:= &gofeed.Item{}

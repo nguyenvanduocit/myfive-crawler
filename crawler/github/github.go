@@ -31,7 +31,9 @@ func (crawler *GithubCrawler)Parse()(*gofeed.Feed, error){
 	if err != nil {
 		return nil, err
 	}
-	crawler.Feed.Title = doc.Find("title").Text()
+	crawler.Feed = &gofeed.Feed{
+		Title: doc.Find("title").Text(),
+	}
 	doc.Find(".explore-content .repo-list .repo-list-item").Each(func(i int, s *goquery.Selection) {
 		item:= &gofeed.Item{}
 		item.Title, _ = s.Find(".repo-list-name a").Attr("href")
