@@ -35,9 +35,9 @@ func (crawler *GithubCrawler)Parse()(*gofeed.Feed, error){
 		Title: doc.Find("title").Text(),
 		Items:[]*gofeed.Item{},
 	}
-	doc.Find(".explore-content .repo-list .repo-list-item").Each(func(i int, s *goquery.Selection) {
+	doc.Find(".explore-content .repo-list li").Each(func(i int, s *goquery.Selection) {
 		item:= &gofeed.Item{}
-		item.Title, _ = s.Find(".repo-list-name a").Attr("href")
+		item.Title, _ = s.Find("h3 a").Attr("href")
 		item.Link = "https://github.com" + item.Title
 		now := time.Now()
 		item.PublishedParsed = &now
