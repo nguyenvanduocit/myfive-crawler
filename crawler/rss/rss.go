@@ -32,5 +32,4 @@ func (crawler *RssCrawler)Parse()(*gofeed.Feed, error){
 		return nil, err
 	}
 	return crawler.Feed, nil
-
 }
